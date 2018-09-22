@@ -14,9 +14,15 @@ OBJS= camera.o \
 	plan.o \
 	square.o \
 	landmark.o \
-	cube.o
+	cube.o \
+	lightsun.o \
+	color.o
 
 all: main
+
+run: main
+	$(RM) test.ppm
+	./main
 
 main: $(OBJS)
 

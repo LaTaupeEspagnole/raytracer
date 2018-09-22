@@ -1,11 +1,13 @@
 #pragma once
 
 #include <vector>
+#include <tuple>
 
 #include "vect.hh"
 #include "square.hh"
 #include "shapable.hh"
 #include "landmark.hh"
+#include "color.hh"
 
 namespace raytracer
 {
@@ -19,14 +21,16 @@ namespace raytracer
     */
     Cube(const Vect3& center,
          const float side,
-         const Vect3& angles);
+         const Vect3& angles,
+         const Color& color);
 
     Vect3 getCenter() const;
     float getSide() const;
     Vect3 getAngles() const;
     Landmark getLandmark() const;
 
-    virtual std::optional<Vect3> intersecte(Ray& ray) override;
+    virtual std::optional<std::tuple<Vect3, Color>>
+      intersecte(const Ray& ray) override;
 
   private:
     Vect3 center_;

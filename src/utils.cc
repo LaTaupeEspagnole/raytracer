@@ -1,5 +1,9 @@
 #include "utils.hh"
 
+#include <tuple>
+
+#include "color.hh"
+
 void raytracer::rotateX(raytracer::Vect3& vect, const float angle)
 {
   float y = vect.getY();
@@ -113,34 +117,67 @@ int raytracer::closerToOrigin(raytracer::Vect3 origin,
   return 1;
 }
 
-std::vector<raytracer::Vect3>
-raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
-                       const std::vector<raytracer::Ray>& rays)
+bool colidesAnything(const raytracer::Ray& ray,
+                     const std::vector<raytracer::Shapable*>& objects)
 {
-  auto res = std::vector<raytracer::Vect3>();
+  for (auto o : objects)
+  {
+    if (o->intersecte(ray).has_value())
+      return true;
+  }
+  return false;
+}
+
+std::vector<raytracer::Color>
+raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
+                       const std::vector<raytracer::Ray>& rays,
+                       const std::vector<raytracer::LightSun>& lightList)
+{
+  auto res = std::vector<raytracer::Color>();
   for (auto r : rays)
   {
     auto rayOrigin = r.getOrigin();
-    std::optional<raytracer::Vect3> closer = std::nullopt;
+    std::optional<std::tuple<raytracer::Vect3, raytracer::Color>> closer
+      = std::nullopt;
     for (auto o : objects)
     {
-      std::optional<raytracer::Vect3> inter = o->intersecte(r);
+      std::optional<std::tuple<raytracer::Vect3, raytracer::Color>> inter
+        = o->intersecte(r);
       if (inter.has_value())
       {
         if (closer.has_value())
         {
-          if (closerToOrigin(rayOrigin, closer.value(), inter.value()) == 2)
-            closer = std::optional<raytracer::Vect3>(inter.value());
+          if (closerToOrigin(rayOrigin,
+                             std::get<0>(closer.value()),
+                             std::get<0>(inter.value()))
+                == 2)
+            closer = std::optional<std::tuple<raytracer::Vect3, raytracer::Color>>
+                      (inter.value());
         }
         else
-          closer = std::optional<raytracer::Vect3>(inter.value());
+          closer = std::optional<std::tuple<raytracer::Vect3, raytracer::Color>>
+                      (inter.value());
       }
     }
 
     if (closer.has_value())
-      res.push_back(raytracer::Vect3(1, 1, 1));
+    {
+      auto resl = std::get<1>(closer.value());
+      for (auto l : lightList)
+      {
+        auto dir = raytracer::vectorFromPoints(std::get<0>(closer.value()),
+                                               l.getPos());
+        auto ref = raytracer::Ray(std::get<0>(closer.value()), dir);
+        if (colidesAnything(ref, objects))
+        {
+          resl = resl * 0.5;
+          break;
+        }
+      }
+      res.push_back(resl);
+    }
     else
-      res.push_back(raytracer::Vect3(0, 0, 0));
+      res.push_back(raytracer::Color(0, 0, 0));
 
   }
 

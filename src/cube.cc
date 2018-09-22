@@ -4,7 +4,8 @@
 
 raytracer::Cube::Cube(const Vect3& center,
                       const float side,
-                      const Vect3& angles)
+                      const Vect3& angles,
+                      const Color& color)
 {
   center_ = center;
   side_ = side;
@@ -37,12 +38,12 @@ raytracer::Cube::Cube(const Vect3& center,
   auto nDCE = landmark_.transposeVect(raytracer::Vect3(0, 0, -1));
   auto nFGA = landmark_.transposeVect(raytracer::Vect3(0, 0, 1));
 
-  squares_.push_back(raytracer::Square(A, B, D, nABD));
-  squares_.push_back(raytracer::Square(B, G, C, nBGC));
-  squares_.push_back(raytracer::Square(G, F, H, nGFH));
-  squares_.push_back(raytracer::Square(F, A, E, nFAE));
-  squares_.push_back(raytracer::Square(D, C, E, nDCE));
-  squares_.push_back(raytracer::Square(F, G, A, nFGA));
+  squares_.push_back(raytracer::Square(A, B, D, nABD, color));
+  squares_.push_back(raytracer::Square(B, G, C, nBGC, color));
+  squares_.push_back(raytracer::Square(G, F, H, nGFH, color));
+  squares_.push_back(raytracer::Square(F, A, E, nFAE, color));
+  squares_.push_back(raytracer::Square(D, C, E, nDCE, color));
+  squares_.push_back(raytracer::Square(F, G, A, nFGA, color));
 }
 
 raytracer::Vect3 raytracer::Cube::getCenter() const
@@ -65,10 +66,12 @@ raytracer::Landmark raytracer::Cube::getLandmark() const
   return landmark_;
 }
 
-std::optional<raytracer::Vect3> raytracer::Cube::intersecte(raytracer::Ray& ray)
+std::optional<std::tuple<raytracer::Vect3, raytracer::Color>>
+raytracer::Cube::intersecte(const raytracer::Ray& ray)
 {
   unsigned i = 0;
-  std::optional<Vect3> closer = std::nullopt;
+  std::optional<std::tuple<raytracer::Vect3, raytracer::Color>> closer
+    = std::nullopt;
 
   while (i < squares_.size() && !closer.has_value())
   {
@@ -81,7 +84,7 @@ std::optional<raytracer::Vect3> raytracer::Cube::intersecte(raytracer::Ray& ray)
     auto cur = squares_[i].intersecte(ray);
     if (cur.has_value()
         && raytracer::closerToOrigin(ray.getOrigin(),
-              closer.value(), cur.value()) == 2)
+              std::get<0>(closer.value()), std::get<0>(cur.value())) == 2)
       closer = cur;
 
     ++i;

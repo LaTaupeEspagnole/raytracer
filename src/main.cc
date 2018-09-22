@@ -10,9 +10,10 @@
 #include "square.hh"
 #include "utils.hh"
 #include "cube.hh"
+#include "color.hh"
 
 void writeRender(std::string filename,
-                  std::vector<raytracer::Vect3> pixels,
+                  std::vector<raytracer::Color>& pixels,
                   unsigned width,
                   unsigned height)
 {
@@ -24,9 +25,9 @@ void writeRender(std::string filename,
     for (unsigned w = 0; w < width; w++)
     {
       auto v = pixels[w + width * h];
-      ostrm << std::to_string(static_cast<int>(std::floor(v.getX() * 255.0f))) << " ";
-      ostrm << std::to_string(static_cast<int>(std::floor(v.getY() * 255.0f))) << " ";
-      ostrm << std::to_string(static_cast<int>(std::floor(v.getZ() * 255.0f))) << " ";
+      ostrm << std::to_string(static_cast<int>(std::floor(v.getR() * 255.0f))) << " ";
+      ostrm << std::to_string(static_cast<int>(std::floor(v.getG() * 255.0f))) << " ";
+      ostrm << std::to_string(static_cast<int>(std::floor(v.getB() * 255.0f))) << " ";
     }
   }
 
@@ -37,8 +38,8 @@ int main()
 {
   auto camPos = raytracer::Vect3(0, 0, 0);
   auto camAngle = raytracer::Vect3(0, 0, 0);
-  float width = 720;
-  float height = 480;
+  float width = 1280;
+  float height = 720;
 
   raytracer::Camera cam = raytracer::Camera(camPos,
                                             camAngle,
@@ -51,17 +52,25 @@ int main()
                   raytracer::Vect3(0, 20, -10),
                   raytracer::Vect3(40, 20, -10),
                   raytracer::Vect3(0, -20, -10),
-                  raytracer::Vect3(0, 0, 1));
+                  raytracer::Vect3(0, 0, 1),
+                  raytracer::Color(1, 0, 0));
+
+  auto cube1 = raytracer::Cube(raytracer::Vect3(30, 0, 0), 2,
+                               raytracer::Vect3(0, raytracer::pi / 4, raytracer::pi / 4),
+                               raytracer::Color(0, 0, 1));
 
   objectList.push_back(&square1);
-
-  auto cube1 = raytracer::Cube(raytracer::Vect3(5, 0, 0), 1,
-                               raytracer::Vect3(0, raytracer::pi / 4, raytracer::pi / 4));
   objectList.push_back(&cube1);
+
+  auto lightList = std::vector<raytracer::LightSun>();
+  auto light1 = raytracer::LightSun(raytracer::Vect3(30, 5, 10),
+                                    raytracer::Vect3(1, 1, 1));
+
+  lightList.push_back(light1);
 
   auto rayList = raytracer::genRays(cam, screen);
 
-  auto pixels = raytracer::renderFrame(objectList, rayList);
+  auto pixels = raytracer::renderFrame(objectList, rayList, lightList);
 
   writeRender("test.ppm", pixels, width, height);
 

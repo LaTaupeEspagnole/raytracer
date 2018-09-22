@@ -8,6 +8,7 @@
 #include "screen.hh"
 #include "shapable.hh"
 #include "square.hh"
+#include "lightsun.hh"
 
 namespace raytracer
 {
@@ -43,8 +44,9 @@ namespace raytracer
   int closerToOrigin(Vect3 origin, Vect3 point1, Vect3 point2);
 
   /* Generates a frame */
-  std::vector<Vect3> renderFrame(const std::vector<Shapable*>& objects,
-                                 const std::vector<Ray>& rays);
+  std::vector<Color> renderFrame(const std::vector<Shapable*>& objects,
+                                 const std::vector<Ray>& rays,
+                                 const std::vector<raytracer::LightSun>& lightList);
 
   /* Writes a frame into a file */
 //  void writeFrame(std::vector<Vect3> frame, Screen screen,
