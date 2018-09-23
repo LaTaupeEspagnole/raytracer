@@ -51,6 +51,15 @@ raytracer::Color::operator+(const raytracer::Color& other) const
 }
 
 raytracer::Color
+raytracer::Color::operator+=(const raytracer::Color& other)
+{
+  r_ += other.getR();
+  g_ += other.getG();
+  b_ += other.getB();
+  return *this;
+}
+
+raytracer::Color
 raytracer::Color::operator-(const raytracer::Color& other) const
 {
   return raytracer::Color(r_ - other.getR(),
@@ -64,6 +73,14 @@ raytracer::Color::operator*(const float other) const
   return raytracer::Color(r_ * other,
                           g_ * other,
                           b_ * other);
+}
+
+raytracer::Color
+raytracer::Color::operator*(const raytracer::Color& other) const
+{
+  return raytracer::Color(r_ * other.getR(),
+                          g_ * other.getG(),
+                          b_ * other.getB());
 }
 
 raytracer::Color

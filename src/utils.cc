@@ -1,8 +1,7 @@
 #include "utils.hh"
 
+#include <optional>
 #include <tuple>
-
-#include "color.hh"
 
 void raytracer::rotateX(raytracer::Vect3& vect, const float angle)
 {
@@ -85,7 +84,7 @@ raytracer::vectorFromPoints(const raytracer::Vect3& v1,
 
 std::vector<raytracer::Ray>
 raytracer::genRays(const raytracer::Camera& cam,
-                    const raytracer::Screen& screen)
+                   const raytracer::Screen& screen)
 {
   Vect3 topLeftPos = screen.getCenter()
                       - (screen.getI() * ((screen.getWidth() / 2)) * screen.getPixelSize())
@@ -117,21 +116,10 @@ int raytracer::closerToOrigin(raytracer::Vect3 origin,
   return 1;
 }
 
-bool colidesAnything(const raytracer::Ray& ray,
-                     const std::vector<raytracer::Shapable*>& objects)
-{
-  for (auto o : objects)
-  {
-    if (o->intersecte(ray).has_value())
-      return true;
-  }
-  return false;
-}
-
 std::vector<raytracer::Color>
 raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
                        const std::vector<raytracer::Ray>& rays,
-                       const std::vector<raytracer::LightSun>& lightList)
+                       const std::vector<raytracer::PointLight>& lightList)
 {
   auto res = std::vector<raytracer::Color>();
   for (auto r : rays)
@@ -163,18 +151,22 @@ raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
     if (closer.has_value())
     {
       auto resl = std::get<1>(closer.value());
+      auto intencity = raytracer::Color(0, 0, 0);
       for (auto l : lightList)
       {
+        intencity += l.interact(objects, std::get<0>(closer.value()));
+        /*
         auto dir = raytracer::vectorFromPoints(std::get<0>(closer.value()),
                                                l.getPos());
         auto ref = raytracer::Ray(std::get<0>(closer.value()), dir);
-        if (colidesAnything(ref, objects))
+        if (ref.colides(objects))
         {
           resl = resl * 0.5;
           break;
         }
+        */
       }
-      res.push_back(resl);
+      res.push_back(resl * intencity);
     }
     else
       res.push_back(raytracer::Color(0, 0, 0));

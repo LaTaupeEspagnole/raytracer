@@ -1,8 +1,11 @@
 #pragma once
 
+#include "fwd.hh"
+
 #include <vector>
 #include <tuple>
 
+#include "ray.hh"
 #include "vect.hh"
 #include "square.hh"
 #include "shapable.hh"

@@ -1,5 +1,7 @@
 #pragma once
 
+#include "fwd.hh"
+
 #include <optional>
 #include <tuple>
 

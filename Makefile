@@ -15,7 +15,7 @@ OBJS= camera.o \
 	square.o \
 	landmark.o \
 	cube.o \
-	lightsun.o \
+	pointlight.o \
 	color.o
 
 all: main

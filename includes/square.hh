@@ -1,11 +1,13 @@
 #pragma once
 
+#include "fwd.hh"
+
 #include <optional>
 #include <tuple>
 
+#include "ray.hh"
 #include "vect.hh"
 #include "plan.hh"
-#include "ray.hh"
 #include "shapable.hh"
 #include "color.hh"
 

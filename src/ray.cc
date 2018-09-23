@@ -1,5 +1,10 @@
 #include "ray.hh"
 
+#include <tuple>
+#include <optional>
+
+#include "color.hh"
+
 raytracer::Ray::Ray(const raytracer::Vect3& origin,
                     const raytracer::Vect3& vect)
 {
@@ -16,4 +21,15 @@ raytracer::Vect3 raytracer::Ray::getOrigin() const
 raytracer::Vect3 raytracer::Ray::getVect() const
 {
   return vect_;
+}
+
+bool
+raytracer::Ray::colides(const std::vector<raytracer::Shapable*>& objects) const
+{
+  for (auto o : objects)
+  {
+    if (o->intersecte(*this).has_value())
+      return true;
+  }
+  return false;
 }

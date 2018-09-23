@@ -1,14 +1,18 @@
 #pragma once
 
+#include "fwd.hh"
+
 #include <cmath>
 #include <vector>
 
 #include "vect.hh"
 #include "ray.hh"
 #include "screen.hh"
+#include "camera.hh"
 #include "shapable.hh"
 #include "square.hh"
-#include "lightsun.hh"
+#include "pointlight.hh"
+#include "color.hh"
 
 namespace raytracer
 {
@@ -46,7 +50,7 @@ namespace raytracer
   /* Generates a frame */
   std::vector<Color> renderFrame(const std::vector<Shapable*>& objects,
                                  const std::vector<Ray>& rays,
-                                 const std::vector<raytracer::LightSun>& lightList);
+                                 const std::vector<PointLight>& lightList);
 
   /* Writes a frame into a file */
 //  void writeFrame(std::vector<Vect3> frame, Screen screen,

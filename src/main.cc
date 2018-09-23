@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 
+#include "ray.hh"
 #include "camera.hh"
 #include "vect.hh"
 #include "screen.hh"
@@ -11,6 +12,8 @@
 #include "utils.hh"
 #include "cube.hh"
 #include "color.hh"
+#include "pointlight.hh"
+#include "shapable.hh"
 
 void writeRender(std::string filename,
                   std::vector<raytracer::Color>& pixels,
@@ -62,9 +65,9 @@ int main()
   objectList.push_back(&square1);
   objectList.push_back(&cube1);
 
-  auto lightList = std::vector<raytracer::LightSun>();
-  auto light1 = raytracer::LightSun(raytracer::Vect3(30, 5, 10),
-                                    raytracer::Vect3(1, 1, 1));
+  auto lightList = std::vector<raytracer::PointLight>();
+  auto light1 = raytracer::PointLight(raytracer::Vect3(30, 5, 10),
+                                      raytracer::Color(1, 1, 1));
 
   lightList.push_back(light1);
 

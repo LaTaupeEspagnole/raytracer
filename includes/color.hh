@@ -1,5 +1,7 @@
 #pragma once
 
+#include "fwd.hh"
+
 namespace raytracer
 {
   class Color
@@ -16,8 +18,10 @@ namespace raytracer
     void setB(const float v);
 
     Color operator+(const Color& other) const;
+    Color operator+=(const Color& other);
     Color operator-(const Color& other) const;
     Color operator*(const float other) const;
+    Color operator*(const Color& other) const;
     friend Color operator*(const float num, const Color& color);
 
   private:

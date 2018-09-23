@@ -1,6 +1,11 @@
 #pragma once
 
+#include "fwd.hh"
+
+#include <vector>
+
 #include "vect.hh"
+#include "shapable.hh"
 
 namespace raytracer
 {
@@ -11,6 +16,8 @@ namespace raytracer
 
     Vect3 getOrigin() const;
     Vect3 getVect() const;
+
+    bool colides(const std::vector<Shapable*>& objects) const;
 
   private:
     Vect3 origin_;
