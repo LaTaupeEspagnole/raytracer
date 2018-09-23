@@ -66,11 +66,16 @@ raytracer::Landmark raytracer::Cube::getLandmark() const
   return landmark_;
 }
 
-std::optional<std::tuple<raytracer::Vect3, raytracer::Color>>
+raytracer::Color raytracer::Cube::getColor() const
+{
+  return squares_[0].getColor();
+}
+
+std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>>
 raytracer::Cube::intersecte(const raytracer::Ray& ray)
 {
   unsigned i = 0;
-  std::optional<std::tuple<raytracer::Vect3, raytracer::Color>> closer
+  std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>> closer
     = std::nullopt;
 
   while (i < squares_.size() && !closer.has_value())

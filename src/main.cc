@@ -14,6 +14,8 @@
 #include "color.hh"
 #include "pointlight.hh"
 #include "shapable.hh"
+#include "lightable.hh"
+#include "ambientlight.hh"
 
 void writeRender(std::string filename,
                   std::vector<raytracer::Color>& pixels,
@@ -65,11 +67,14 @@ int main()
   objectList.push_back(&square1);
   objectList.push_back(&cube1);
 
-  auto lightList = std::vector<raytracer::PointLight>();
+  auto lightList = std::vector<raytracer::Lightable*>();
   auto light1 = raytracer::PointLight(raytracer::Vect3(30, 5, 10),
-                                      raytracer::Color(1, 1, 1));
+                                      raytracer::Color(1, 1, 1),
+                                      1);
+  auto light2 = raytracer::AmbientLight(raytracer::Color(1, 1, 1), 0.3);
 
-  lightList.push_back(light1);
+  lightList.push_back(&light1);
+  lightList.push_back(&light2);
 
   auto rayList = raytracer::genRays(cam, screen);
 

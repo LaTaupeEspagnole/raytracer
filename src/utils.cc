@@ -119,17 +119,17 @@ int raytracer::closerToOrigin(raytracer::Vect3 origin,
 std::vector<raytracer::Color>
 raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
                        const std::vector<raytracer::Ray>& rays,
-                       const std::vector<raytracer::PointLight>& lightList)
+                       const std::vector<raytracer::Lightable*>& lightList)
 {
   auto res = std::vector<raytracer::Color>();
   for (auto r : rays)
   {
     auto rayOrigin = r.getOrigin();
-    std::optional<std::tuple<raytracer::Vect3, raytracer::Color>> closer
+    std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>> closer
       = std::nullopt;
     for (auto o : objects)
     {
-      std::optional<std::tuple<raytracer::Vect3, raytracer::Color>> inter
+      std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>> inter
         = o->intersecte(r);
       if (inter.has_value())
       {
@@ -139,33 +139,24 @@ raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
                              std::get<0>(closer.value()),
                              std::get<0>(inter.value()))
                 == 2)
-            closer = std::optional<std::tuple<raytracer::Vect3, raytracer::Color>>
+            closer = std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>>
                       (inter.value());
         }
         else
-          closer = std::optional<std::tuple<raytracer::Vect3, raytracer::Color>>
+          closer = std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>>
                       (inter.value());
       }
     }
 
     if (closer.has_value())
     {
-      auto resl = std::get<1>(closer.value());
+      auto resl = std::get<1>(closer.value())->getColor();
       auto intencity = raytracer::Color(0, 0, 0);
       for (auto l : lightList)
-      {
-        intencity += l.interact(objects, std::get<0>(closer.value()));
-        /*
-        auto dir = raytracer::vectorFromPoints(std::get<0>(closer.value()),
-                                               l.getPos());
-        auto ref = raytracer::Ray(std::get<0>(closer.value()), dir);
-        if (ref.colides(objects))
-        {
-          resl = resl * 0.5;
-          break;
-        }
-        */
-      }
+        intencity += l->interact(objects,
+                                 std::get<0>(closer.value()),
+                                 *std::get<1>(closer.value()));
+      intencity.normalize();
       res.push_back(resl * intencity);
     }
     else

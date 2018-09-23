@@ -27,8 +27,9 @@ namespace raytracer
     Vect3 getAB() const;
     Vect3 getAD() const;
     Plan getPlan() const;
+    Color getColor() const;
 
-    virtual std::optional<std::tuple<Vect3, Color>>
+    virtual std::optional<std::tuple<Vect3, Shapable*>>
       intersecte(const Ray& ray) override;
 
   private:

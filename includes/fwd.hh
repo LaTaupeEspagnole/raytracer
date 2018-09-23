@@ -6,11 +6,16 @@ namespace raytracer
   class Color;
   class Cube;
   class Landmark;
-  class PointLight;
   class Plan;
   class Ray;
   class Screen;
-  class Shapable;
   class Square;
-  class Vect;
+  class Vect2;
+  class Vect3;
+
+  class PointLight;
+  class AmbientLight;
+
+  class Shapable;
+  class Lightable;
 }

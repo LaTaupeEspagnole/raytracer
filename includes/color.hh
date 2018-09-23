@@ -17,6 +17,8 @@ namespace raytracer
     void setG(const float v);
     void setB(const float v);
 
+    void normalize();
+
     Color operator+(const Color& other) const;
     Color operator+=(const Color& other);
     Color operator-(const Color& other) const;

@@ -31,8 +31,9 @@ namespace raytracer
     float getSide() const;
     Vect3 getAngles() const;
     Landmark getLandmark() const;
+    Color getColor() const;
 
-    virtual std::optional<std::tuple<Vect3, Color>>
+    virtual std::optional<std::tuple<Vect3, Shapable*>>
       intersecte(const Ray& ray) override;
 
   private:

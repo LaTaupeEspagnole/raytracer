@@ -1,5 +1,5 @@
 CC= g++
-CXXFLAGS= -std=c++17 -pedantic -Wall -Wextra -Werror -Iincludes -g
+CXXFLAGS= -std=c++17 -pedantic -Wall -Wextra -Werror -Iincludes -g -O0
 
 VPATH=src
 
@@ -16,7 +16,8 @@ OBJS= camera.o \
 	landmark.o \
 	cube.o \
 	pointlight.o \
-	color.o
+	color.o \
+	ambientlight.o
 
 all: main
 

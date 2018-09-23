@@ -42,6 +42,16 @@ void raytracer::Color::setB(const float v)
   b_ = v;
 }
 
+void raytracer::Color::normalize()
+{
+  if (r_ > 1.0f)
+    r_ = 1.0f;
+  if (g_ > 1.0f)
+    g_ = 1.0f;
+  if (b_ > 1.0f)
+    b_ = 1.0f;
+}
+
 raytracer::Color
 raytracer::Color::operator+(const raytracer::Color& other) const
 {

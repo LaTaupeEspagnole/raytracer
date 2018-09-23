@@ -24,7 +24,7 @@ namespace raytracer
     Color getColor() const;
     void setColor(const Color& color);
 
-    std::optional<std::tuple<Vect3, Color>>
+    std::optional<std::tuple<Vect3, Shapable*>>
       intersecte(const Ray& ray) override;
 
   private:

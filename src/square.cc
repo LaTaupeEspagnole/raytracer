@@ -42,7 +42,12 @@ raytracer::Plan raytracer::Square::getPlan() const
   return p_;
 }
 
-std::optional<std::tuple<raytracer::Vect3, raytracer::Color>>
+raytracer::Color raytracer::Square::getColor() const
+{
+  return p_.getColor();
+}
+
+std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>>
 raytracer::Square::intersecte(const raytracer::Ray& ray)
 {
   auto inter = p_.intersecte(ray);
@@ -55,6 +60,6 @@ raytracer::Square::intersecte(const raytracer::Ray& ray)
   float a = AP.dot(vAB_);
   float b = AP.dot(vAD_);
   if (a >= 0.0f && a <= vAB_.dot(vAB_) && b >= 0.0f && b <= vAD_.dot(vAD_))
-    return inter.value();
+    return std::make_tuple(std::get<0>(inter.value()), this);
   return std::nullopt;
 }

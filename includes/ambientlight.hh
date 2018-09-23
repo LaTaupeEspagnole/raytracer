@@ -4,23 +4,20 @@
 
 #include <vector>
 
-#include "vect.hh"
 #include "color.hh"
-#include "shapable.hh"
 #include "lightable.hh"
+#include "shapable.hh"
 
 namespace raytracer
 {
-  class PointLight : public Lightable
+  class AmbientLight : public Lightable
   {
   public:
-    PointLight(const Vect3& pos, const Color& color, const float brightness);
+    AmbientLight(const Color& color, const float brightness);
 
-    Vect3 getPos() const;
     Color getColor() const;
     float getBrightness() const;
 
-    void setPos(const Vect3& pos);
     void setColor(const Color& color);
     void setBrightness(const float brightness);
 
@@ -29,7 +26,6 @@ namespace raytracer
                            const Shapable&) const override;
 
   private:
-    Vect3 pos_;
     Color color_;
     float brightness_;
   };

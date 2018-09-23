@@ -8,13 +8,17 @@
 #include "vect.hh"
 #include "ray.hh"
 #include "color.hh"
+#include "shapable.hh"
 
 namespace raytracer
 {
   class Shapable
   {
   public:
-    virtual std::optional<std::tuple<Vect3, Color>>
+
+    virtual Color getColor() const = 0;
+
+    virtual std::optional<std::tuple<Vect3, Shapable*>>
       intersecte(const Ray& ray) = 0;
   };
 }

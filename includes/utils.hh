@@ -13,6 +13,7 @@
 #include "square.hh"
 #include "pointlight.hh"
 #include "color.hh"
+#include "lightable.hh"
 
 namespace raytracer
 {
@@ -50,7 +51,7 @@ namespace raytracer
   /* Generates a frame */
   std::vector<Color> renderFrame(const std::vector<Shapable*>& objects,
                                  const std::vector<Ray>& rays,
-                                 const std::vector<PointLight>& lightList);
+                                 const std::vector<Lightable*>& lightList);
 
   /* Writes a frame into a file */
 //  void writeFrame(std::vector<Vect3> frame, Screen screen,

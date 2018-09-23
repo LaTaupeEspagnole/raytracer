@@ -3,29 +3,55 @@
 #include "utils.hh"
 #include "ray.hh"
 
-raytracer::PointLight::PointLight(const Vect3& pos, const Color& color)
+raytracer::PointLight::PointLight(const Vect3& pos,
+                                  const Color& color,
+                                  const float brightness)
   : pos_(pos)
   , color_(color)
+  , brightness_(brightness)
 {}
 
-raytracer::Vect3 raytracer::PointLight::getPos()
+raytracer::Vect3 raytracer::PointLight::getPos() const
 {
   return pos_;
 }
 
-raytracer::Color raytracer::PointLight::getColor()
+raytracer::Color raytracer::PointLight::getColor() const
 {
   return color_;
 }
 
-raytracer::Color
-raytracer::PointLight::interact(const std::vector<raytracer::Shapable*>& objects,
-                                const raytracer::Vect3& point) const
+float raytracer::PointLight::getBrightness() const
 {
+  return brightness_;
+}
+
+void raytracer::PointLight::setPos(const raytracer::Vect3& pos)
+{
+  pos_ = pos;
+}
+
+void raytracer::PointLight::setColor(const raytracer::Color& color)
+{
+  color_ = color;
+}
+
+void raytracer::PointLight::setBrightness(const float brightness)
+{
+  brightness_ = brightness;
+}
+
+raytracer::Color
+raytracer::PointLight::interact(const std::vector<raytracer::Shapable*>& objs,
+                                const raytracer::Vect3& point,
+                                const raytracer::Shapable& obj) const
+{
+  std::ignore = obj;
+
   auto rayDir = raytracer::vectorFromPoints(point, pos_);
   auto ray = raytracer::Ray(point, rayDir);
-  if (ray.colides(objects))
+  if (ray.colides(objs))
    return raytracer::Color(0, 0, 0);
 
-  return color_; // light mitigation formula to add
+  return color_ * brightness_; // light mitigation formula to add
 }
