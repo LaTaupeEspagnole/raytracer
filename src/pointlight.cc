@@ -50,8 +50,8 @@ raytracer::PointLight::interact(const std::vector<raytracer::Shapable*>& objs,
 
   auto rayDir = raytracer::vectorFromPoints(point, pos_);
   auto ray = raytracer::Ray(point, rayDir);
-  if (ray.colides(objs))
+  if (ray.colidesBefore(objs, rayDir.getNorm()))
    return raytracer::Color(0, 0, 0);
 
-  return color_ * brightness_; // light mitigation formula to add
+  return color_ * (brightness_ / rayDir.getNorm());
 }

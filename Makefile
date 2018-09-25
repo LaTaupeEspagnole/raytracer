@@ -28,5 +28,5 @@ run: main
 main: $(OBJS)
 
 clean:
-	$(RM) main
+	$(RM) main test.ppm
 	$(RM) $(OBJS)

@@ -4,6 +4,7 @@
 #include <optional>
 
 #include "color.hh"
+#include "utils.hh"
 
 raytracer::Ray::Ray(const raytracer::Vect3& origin,
                     const raytracer::Vect3& vect)
@@ -24,12 +25,20 @@ raytracer::Vect3 raytracer::Ray::getVect() const
 }
 
 bool
-raytracer::Ray::colides(const std::vector<raytracer::Shapable*>& objects) const
+raytracer::Ray::colidesBefore(const std::vector<raytracer::Shapable*>& objects,
+                              const float dist) const
 {
   for (auto o : objects)
   {
-    if (o->intersecte(*this).has_value())
-      return true;
+    auto inter = o->intersecte(*this);
+    if (inter.has_value())
+    {
+      auto distObj
+        = raytracer::vectorFromPoints(origin_,
+                                      std::get<0>(inter.value())).getNorm();
+      if (distObj < dist)
+        return true;
+    }
   }
   return false;
 }
