@@ -1,0 +1,20 @@
+Commande : time ./main
+Config: 1920x1080 res, 7 squares, 1 ambient light, 2 point light
+
++---------+--------+--------+--------+
+| Commit  |   -O0  |   -O2  |   -O3  |
++---------+--------+--------+--------+
+| d14e8d0 |  11.8s |   2.9s |   2.9s |
+|
+
+
+
+Commande : time ./main
+Config: 1280x720 res, 7 squares, 1 ambient light, 2 point light
+
++---------+--------+--------+--------+
+| Commit  |   -O0  |   -O2  |   -O3  |
++---------+--------+--------+--------+
+| d14e8d0 |   5.0s |   1.3s |   1.2s |
+|
+

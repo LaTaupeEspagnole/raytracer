@@ -1,0 +1,25 @@
+                          _______ ____  _____   ____
+                         |__   __/ __ \|  __ \ / __ \
+                            | | | |  | | |  | | |  | |
+                            | | | |  | | |  | | |  | |
+                            | | | |__| | |__| | |__| |
+                            |_|  \____/|_____/ \____/
+
+You will find here a non exhaustive list of features that  will be added in the
+future or are in ongoing development.  Feel free to send  me bugs  you found or
+cool features to add to this project (sebastiengou@outlook.fr).
+
+[ ] Not done.
+[~] In progress.
+[+] Done.
+
+
+[~] Lights
+  [ ] Directional lights
+[ ] Correct return type of intersecte() func into square type
+[ ] Start optimising renderFrame() func (intersection ray/obj)
+    (acheve 1/20 - 1/30 sec for one frame in 1280x720 res)
+[ ] Reflection
+[ ] Speculare light ?
+[ ] SDL2 integration
+[ ] Textures
