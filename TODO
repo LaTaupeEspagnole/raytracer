@@ -14,8 +14,8 @@ cool features to add to this project (sebastiengou@outlook.fr).
 [+] Done.
 
 
-[~] Lights
-  [ ] Directional lights
+[+] Lights
+  [+] Directional lights
 [ ] Correct return type of intersecte() func into square type
 [ ] Start optimising renderFrame() func (intersection ray/obj)
     (acheve 1/20 - 1/30 sec for one frame in 1280x720 res)

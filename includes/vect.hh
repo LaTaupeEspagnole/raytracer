@@ -23,6 +23,7 @@ namespace raytracer
     float dot(const Vect3& other) const;
     void normalize();
 
+    Vect3 operator-() const;
     Vect3 operator+(const Vect3& other) const;
     Vect3 operator-(const Vect3& other) const;
     Vect3 operator*(const float other) const;
@@ -53,6 +54,7 @@ namespace raytracer
     float dot(const Vect2& other) const;
     void normalize();
 
+    Vect2 operator-() const;
     Vect2 operator+(const Vect2& other) const;
     Vect2 operator-(const Vect2& other) const;
     Vect2 operator*(const float other) const;

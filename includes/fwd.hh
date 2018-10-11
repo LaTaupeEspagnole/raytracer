@@ -15,6 +15,7 @@ namespace raytracer
 
   class PointLight;
   class AmbientLight;
+  class DirectionalLight;
 
   class Shapable;
   class Lightable;

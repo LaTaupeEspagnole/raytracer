@@ -42,3 +42,14 @@ raytracer::Ray::colidesBefore(const std::vector<raytracer::Shapable*>& objects,
   }
   return false;
 }
+
+bool raytracer::Ray::colides(const std::vector<raytracer::Shapable*>& objects) const
+{
+  for (auto o : objects)
+  {
+    auto inter = o->intersecte(*this);
+    if (inter.has_value())
+      return true;
+  }
+  return false;
+}

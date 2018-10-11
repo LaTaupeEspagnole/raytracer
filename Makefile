@@ -1,5 +1,5 @@
 CC= g++
-CXXFLAGS= -std=c++17 -pedantic -Wall -Wextra -Werror -Iincludes -g -O0
+CXXFLAGS= -std=c++17 -pedantic -Wall -Wextra -Werror -Iincludes
 
 VPATH=src
 
@@ -17,7 +17,8 @@ OBJS= camera.o \
 	cube.o \
 	pointlight.o \
 	color.o \
-	ambientlight.o
+	ambientlight.o \
+	dirlight.o
 
 all: main
 
@@ -25,7 +26,11 @@ run: main
 	$(RM) test.ppm
 	./main
 
+main: CXXFLAGS+= -O3
 main: $(OBJS)
+
+debug: CXXFLAGS+= -g -O0
+debug: $(OBJS)
 
 clean:
 	$(RM) main test.ppm

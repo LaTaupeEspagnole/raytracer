@@ -78,6 +78,11 @@ void raytracer::Vect3::normalize()
   z_ = z_ / norm;
 }
 
+raytracer::Vect3 raytracer::Vect3::operator-() const
+{
+  return raytracer::Vect3(-x_, -y_, -z_);
+}
+
 raytracer::Vect3 raytracer::Vect3::operator+(const Vect3& other) const
 {
   return Vect3(x_ + other.getX(), y_ + other.getY(), z_ + other.getZ());
@@ -156,6 +161,11 @@ void raytracer::Vect2::normalize()
   float norm = this->getNorm();
   x_ = x_ / norm;
   y_ = y_ / norm;
+}
+
+raytracer::Vect2 raytracer::Vect2::operator-() const
+{
+  return raytracer::Vect2(-x_, -y_);
 }
 
 raytracer::Vect2 raytracer::Vect2::operator+(const Vect2& other) const
