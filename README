@@ -19,6 +19,9 @@ This  project  is on  making  a  simple  raytracer  with  using  only  cubes as
 
     make clean  -> Cleans the trash files created by make and the main program.
 
+    make doc    -> Make the html and latex documentation
+                      html is in "html/index.html"
+                      latex is in "latex/refman.pdf"
 
 ----- USE -----
 

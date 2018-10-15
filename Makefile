@@ -34,6 +34,11 @@ main: $(OBJS)
 debug: CXXFLAGS+= -g -O0
 debug: main
 
+doc:
+	doxygen doc.doxygen
+	cd latex; make
+
 clean:
 	$(RM) main test.ppm
 	$(RM) $(OBJS)
+	$(RM) -r html latex
