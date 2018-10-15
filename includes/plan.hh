@@ -29,8 +29,8 @@ namespace raytracer
       intersecte(const Ray& ray) override;
 
   private:
-    Vect3 norm_;
     float d_;
+    Vect3 norm_;
     Color color_;
   };
 }

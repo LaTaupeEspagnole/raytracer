@@ -6,27 +6,24 @@ float computeD(const raytracer::Vect3& p, const raytracer::Vect3& n)
 }
 
 raytracer::Plan::Plan()
-{
-  d_ = 0.0f;
-  norm_ = raytracer::Vect3(1, 0, 0);
-  color_ = raytracer::Color(1, 1, 1);
-}
+  : d_(0.0f)
+  , norm_(raytracer::Vect3(1, 0, 0))
+  , color_(raytracer::Color(1, 1, 1))
+{}
 
 raytracer::Plan::Plan(const raytracer::Vect3& norm,
                       const raytracer::Vect3& point,
                       const raytracer::Color& color)
-{
-  d_ = computeD(point, norm);
-  norm_ = norm;
-  color_ = color;
-}
+  : d_(computeD(point, norm))
+  , norm_(norm)
+  , color_(color)
+{}
 
 raytracer::Plan::Plan(const raytracer::Plan& p)
-{
-  norm_ = p.getNorm();
-  d_ = p.getD();
-  color_ = p.getColor();
-}
+  : d_(p.getD())
+  , norm_(p.getNorm())
+  , color_(p.getColor())
+{}
 
 raytracer::Vect3 raytracer::Plan::getNorm() const
 {
@@ -55,7 +52,7 @@ raytracer::Plan::intersecte(const raytracer::Ray& ray)
     return std::nullopt;
 
   float t = -((norm_.dot(ray.getOrigin()) + d_) / norm_.dot(ray.getVect()));
-  if (t < 0.001f)
+  if (t < 0.001f) // threashhold to prevent auto colision
     return std::nullopt;
 
   raytracer::Vect3 res =

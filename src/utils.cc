@@ -42,7 +42,6 @@ raytracer::Vect3 raytracer::vectorFromAngles(const raytracer::Vect3& angles)
 {
   raytracer::Vect3 baseVect = raytracer::Vect3(1, 0, 0);
   raytracer::applyAngle(baseVect, angles);
-
   return baseVect;
 }
 
@@ -89,8 +88,8 @@ raytracer::genRays(const raytracer::Camera& cam,
                    const raytracer::Screen& screen)
 {
   Vect3 topLeftPos = screen.getCenter()
-                      - (screen.getI() * ((screen.getWidth() / 2)) * screen.getPixelSize())
-                      + (screen.getJ() * ((screen.getHeight() / 2)) * screen.getPixelSize());
+        - (screen.getI() * ((screen.getWidth() / 2)) * screen.getPixelSize())
+        + (screen.getJ() * ((screen.getHeight() / 2)) * screen.getPixelSize());
 
   auto res = std::vector<raytracer::Ray>();
 
@@ -137,10 +136,9 @@ raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
       {
         if (closer.has_value())
         {
-          if (closerToOrigin(rayOrigin,
-                             std::get<0>(closer.value()),
-                             std::get<0>(inter.value()))
-                == 2)
+          auto closerVal = std::get<0>(closer.value());
+          auto interVal = std::get<0>(inter.value());
+          if (closerToOrigin(rayOrigin, closerVal, interVal) == 2)
             closer = std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>>
                       (inter.value());
         }
@@ -165,6 +163,5 @@ raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
       res.push_back(raytracer::Color(0, 0, 0));
 
   }
-
   return res;
 }

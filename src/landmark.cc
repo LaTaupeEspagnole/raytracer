@@ -1,23 +1,21 @@
 #include "landmark.hh"
 
 raytracer::Landmark::Landmark()
-{
-  o_ = raytracer::Vect3(0, 0, 0);
-  x_ = raytracer::Vect3(0, 0, 0);
-  y_ = raytracer::Vect3(0, 0, 0);
-  z_ = raytracer::Vect3(0, 0, 0);
-}
+  : o_(raytracer::Vect3(0, 0, 0))
+  , x_(raytracer::Vect3(0, 0, 0))
+  , y_(raytracer::Vect3(0, 0, 0))
+  , z_(raytracer::Vect3(0, 0, 0))
+{}
 
 raytracer::Landmark::Landmark(const raytracer::Vect3& o,
                               const raytracer::Vect3& x,
                               const raytracer::Vect3& y,
                               const raytracer::Vect3& z)
-{
-  o_ = o;
-  x_ = x;
-  y_ = y;
-  z_ = z;
-}
+  : o_(o)
+  , x_(x)
+  , y_(y)
+  , z_(z)
+{}
 
 raytracer::Vect3 raytracer::Landmark::getO() const
 {

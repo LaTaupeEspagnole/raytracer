@@ -3,25 +3,22 @@
 #include <cmath>
 
 raytracer::Vect3::Vect3()
-{
-  x_ = 0;
-  y_ = 0;
-  z_ = 0;
-}
+  : x_(0.0f)
+  , y_(0.0f)
+  , z_(0.0f)
+{}
 
 raytracer::Vect3::Vect3(float x, float y, float z)
-{
-  x_ = x;
-  y_ = y;
-  z_ = z;
-}
+  : x_(x)
+  , y_(y)
+  , z_(z)
+{}
 
 raytracer::Vect3::Vect3(const Vect3& v)
-{
-  x_ = v.getX();
-  y_ = v.getY();
-  z_ = v.getZ();
-}
+  : x_(v.getX())
+  , y_(v.getY())
+  , z_(v.getZ())
+{}
 
 float raytracer::Vect3::getX() const
 {
@@ -61,8 +58,8 @@ bool raytracer::Vect3::isNullVect() const
 float raytracer::Vect3::getNorm() const
 {
   return std::sqrt(std::pow(x_, 2)
-                  + std::pow(y_, 2)
-                  + std::pow(z_, 2));
+                   + std::pow(y_, 2)
+                   + std::pow(z_, 2));
 }
 
 float raytracer::Vect3::dot(const Vect3& other) const
@@ -104,22 +101,19 @@ raytracer::Vect3 raytracer::operator*(const float num, const Vect3& vect)
 }
 
 raytracer::Vect2::Vect2()
-{
-  x_ = 0;
-  y_ = 0;
-}
+  : x_(0.0f)
+  , y_(0.0f)
+{}
 
 raytracer::Vect2::Vect2(float x, float y)
-{
-  x_ = x;
-  y_ = y;
-}
+  : x_(x)
+  , y_(y)
+{}
 
 raytracer::Vect2::Vect2(const Vect2& v)
-{
-  x_ = v.getX();
-  y_ = v.getY();
-}
+  : x_(v.getX())
+  , y_(v.getY())
+{}
 
 float raytracer::Vect2::getX() const
 {

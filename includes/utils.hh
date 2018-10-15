@@ -52,8 +52,4 @@ namespace raytracer
   std::vector<Color> renderFrame(const std::vector<Shapable*>& objects,
                                  const std::vector<Ray>& rays,
                                  const std::vector<Lightable*>& lightList);
-
-  /* Writes a frame into a file */
-//  void writeFrame(std::vector<Vect3> frame, Screen screen,
-//                  std::String filename);
 }

@@ -7,20 +7,18 @@ raytracer::Square::Square(const raytracer::Vect3& A,
                           const raytracer::Vect3& D,
                           const raytracer::Vect3& norm,
                           const raytracer::Color& color)
-{
-  pA_ = A;
-  vAB_ = raytracer::vectorFromPoints(A, B);
-  vAD_ = raytracer::vectorFromPoints(A, D);
-  p_ = raytracer::Plan(norm, A, color);
-}
+  : p_(raytracer::Plan(norm, A, color))
+  , pA_(A)
+  , vAB_(raytracer::vectorFromPoints(A, B))
+  , vAD_(raytracer::vectorFromPoints(A, D))
+{}
 
 raytracer::Square::Square(const raytracer::Square& s)
-{
-  p_ = s.getPlan();
-  pA_ = s.getPos();
-  vAB_ = s.getAB();
-  vAD_ = s.getAD();
-}
+  : p_(s.getPlan())
+  , pA_(s.getPos())
+  , vAB_(s.getAB())
+  , vAD_(s.getAD())
+{}
 
 raytracer::Vect3 raytracer::Square::getPos() const
 {

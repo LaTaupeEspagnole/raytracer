@@ -8,9 +8,9 @@
 
 raytracer::Ray::Ray(const raytracer::Vect3& origin,
                     const raytracer::Vect3& vect)
+  : origin_(origin)
+  , vect_(vect)
 {
-  origin_ = origin;
-  vect_ = vect;
   vect_.normalize();
 }
 

@@ -20,17 +20,19 @@ OBJS= camera.o \
 	ambientlight.o \
 	dirlight.o
 
-all: main
+all: opti
 
-run: main
+run: opti
 	$(RM) test.ppm
 	./main
 
-main: CXXFLAGS+= -O3
+opti: CXXFLAGS+= -O3
+opti: main
+
 main: $(OBJS)
 
 debug: CXXFLAGS+= -g -O0
-debug: $(OBJS)
+debug: main
 
 clean:
 	$(RM) main test.ppm
