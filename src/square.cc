@@ -47,7 +47,7 @@ raytracer::Color raytracer::Square::getColor() const
   return p_.getColor();
 }
 
-std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>>
+std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>>
 raytracer::Square::intersecte(const raytracer::Ray& ray)
 {
   auto inter = p_.intersecte(ray);

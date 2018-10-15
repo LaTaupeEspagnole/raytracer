@@ -8,6 +8,7 @@
 #include "color.hh"
 #include "shapable.hh"
 #include "lightable.hh"
+#include "flatshapable.hh"
 
 namespace raytracer
 {
@@ -28,7 +29,7 @@ namespace raytracer
 
     virtual Color interact(const std::vector<Shapable*>& obj,
                            const Vect3& point,
-                           const Shapable&) const override;
+                           const FlatShapable&) const override;
 
   private:
     Vect3 dir_;

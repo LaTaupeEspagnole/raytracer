@@ -11,6 +11,7 @@
 #include "shapable.hh"
 #include "landmark.hh"
 #include "color.hh"
+#include "flatshapable.hh"
 
 namespace raytracer
 {
@@ -33,7 +34,7 @@ namespace raytracer
     Landmark getLandmark() const;
     Color getColor() const;
 
-    virtual std::optional<std::tuple<Vect3, Shapable*>>
+    virtual std::optional<std::tuple<Vect3, FlatShapable*>>
       intersecte(const Ray& ray) override;
 
   private:

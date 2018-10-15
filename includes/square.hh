@@ -10,10 +10,11 @@
 #include "plan.hh"
 #include "shapable.hh"
 #include "color.hh"
+#include "flatshapable.hh"
 
 namespace raytracer
 {
-  class Square : public Shapable
+  class Square : public Shapable, public FlatShapable
   {
   public:
     Square(const Square& s);
@@ -27,9 +28,9 @@ namespace raytracer
     Vect3 getAB() const;
     Vect3 getAD() const;
     Plan getPlan() const;
-    Color getColor() const;
+    Color getColor() const override;
 
-    virtual std::optional<std::tuple<Vect3, Shapable*>>
+    virtual std::optional<std::tuple<Vect3, FlatShapable*>>
       intersecte(const Ray& ray) override;
 
   private:

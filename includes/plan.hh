@@ -9,10 +9,11 @@
 #include "vect.hh"
 #include "shapable.hh"
 #include "color.hh"
+#include "flatshapable.hh"
 
 namespace raytracer
 {
-  class Plan : public Shapable
+  class Plan : public Shapable, public FlatShapable
   {
   public:
     Plan();
@@ -21,10 +22,10 @@ namespace raytracer
 
     Vect3 getNorm() const;
     float getD() const;
-    Color getColor() const;
+    Color getColor() const override;
     void setColor(const Color& color);
 
-    std::optional<std::tuple<Vect3, Shapable*>>
+    std::optional<std::tuple<Vect3, FlatShapable*>>
       intersecte(const Ray& ray) override;
 
   private:

@@ -44,7 +44,7 @@ raytracer::Color
 raytracer::DirectionalLight::interact(
   const std::vector<raytracer::Shapable*>& objs,
   const raytracer::Vect3& point,
-  const raytracer::Shapable&) const
+  const raytracer::FlatShapable&) const
 {
   auto ray = raytracer::Ray(point, -dir_);
   if (ray.colides(objs))

@@ -69,22 +69,23 @@ int main()
   objectList.push_back(&cube1);
 
   auto lightList = std::vector<raytracer::Lightable*>();
-/*  auto light1 = raytracer::PointLight(raytracer::Vect3(30, 5, 10),
+  auto light1 = raytracer::PointLight(raytracer::Vect3(30, 5, 10),
                                       raytracer::Color(1, 1, 1),
-                                      5); */
-  auto light2 = raytracer::AmbientLight(raytracer::Color(1, 1, 1), 0.3);
-/*
+                                      6);
+  auto light2 = raytracer::AmbientLight(raytracer::Color(1, 1, 1), 0.4);
+
   auto light3 = raytracer::PointLight(raytracer::Vect3(25, 10, -9),
                                       raytracer::Color(1, 1, 1),
                                       1);
-*/
+/*
   auto light4 = raytracer::DirectionalLight(-raytracer::Vect3(0, 0, 1),
                                             raytracer::Color(1, 1, 1),
                                             1);
-  //lightList.push_back(&light1);
+*/
+  lightList.push_back(&light1);
   lightList.push_back(&light2);
-  //lightList.push_back(&light3);
-  lightList.push_back(&light4);
+  lightList.push_back(&light3);
+  //lightList.push_back(&light4);
 
   auto rayList = raytracer::genRays(cam, screen);
 

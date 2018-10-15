@@ -1,6 +1,8 @@
 #pragma once
 
 #include "fwd.hh"
+#include "shapable.hh"
+#include "flatshapable.hh"
 
 namespace raytracer
 {
@@ -16,6 +18,6 @@ namespace raytracer
 
     virtual Color interact(const std::vector<Shapable*>& obj,
                            const Vect3& point,
-                           const Shapable&) const = 0;
+                           const FlatShapable&) const = 0;
   };
 }

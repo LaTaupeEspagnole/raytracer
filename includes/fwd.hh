@@ -19,4 +19,5 @@ namespace raytracer
 
   class Shapable;
   class Lightable;
+  class FlatShapable;
 }

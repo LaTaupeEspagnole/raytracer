@@ -12,8 +12,10 @@ This  project  is on  making  a  simple  raytracer  with  using  only  cubes as
 ----- BUILD -----
 
   Build the project :
-    make        -> Builds the main program.
-    make run    -> Builds and runs the main program.
+    make        -> Builds the main program (-O3).
+    make run    -> Builds and runs the main program (-O3).
+
+    make debug  -> Builds the main program in debug mode (-g -O0)
 
     make clean  -> Cleans the trash files created by make and the main program.
 

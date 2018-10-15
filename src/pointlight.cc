@@ -44,7 +44,7 @@ void raytracer::PointLight::setBrightness(const float brightness)
 raytracer::Color
 raytracer::PointLight::interact(const std::vector<raytracer::Shapable*>& objs,
                                 const raytracer::Vect3& point,
-                                const raytracer::Shapable& obj) const
+                                const raytracer::FlatShapable& obj) const
 {
   std::ignore = obj;
 

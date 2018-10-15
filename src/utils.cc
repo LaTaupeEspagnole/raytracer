@@ -3,6 +3,8 @@
 #include <optional>
 #include <tuple>
 
+#include "flatshapable.hh"
+
 void raytracer::rotateX(raytracer::Vect3& vect, const float angle)
 {
   float y = vect.getY();
@@ -125,11 +127,11 @@ raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
   for (auto r : rays)
   {
     auto rayOrigin = r.getOrigin();
-    std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>> closer
+    std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>> closer
       = std::nullopt;
     for (auto o : objects)
     {
-      std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>> inter
+      std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>> inter
         = o->intersecte(r);
       if (inter.has_value())
       {
@@ -139,11 +141,11 @@ raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
                              std::get<0>(closer.value()),
                              std::get<0>(inter.value()))
                 == 2)
-            closer = std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>>
+            closer = std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>>
                       (inter.value());
         }
         else
-          closer = std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>>
+          closer = std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>>
                       (inter.value());
       }
     }

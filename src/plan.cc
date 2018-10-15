@@ -48,7 +48,7 @@ void raytracer::Plan::setColor(const raytracer::Color& color)
   color_ = color;
 }
 
-std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>>
+std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>>
 raytracer::Plan::intersecte(const raytracer::Ray& ray)
 {
   if (norm_.dot(ray.getVect()) == 0.0f)

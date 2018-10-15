@@ -71,11 +71,11 @@ raytracer::Color raytracer::Cube::getColor() const
   return squares_[0].getColor();
 }
 
-std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>>
+std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>>
 raytracer::Cube::intersecte(const raytracer::Ray& ray)
 {
   unsigned i = 0;
-  std::optional<std::tuple<raytracer::Vect3, raytracer::Shapable*>> closer
+  std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>> closer
     = std::nullopt;
 
   while (i < squares_.size() && !closer.has_value())
