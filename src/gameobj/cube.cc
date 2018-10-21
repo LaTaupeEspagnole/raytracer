@@ -2,10 +2,10 @@
 
 #include "utils.hh"
 
-raytracer::Cube::Cube(const Vect3& center,
+gameobj::Cube::Cube(const raytracer::Vect3& center,
                       const float side,
-                      const Vect3& angles,
-                      const Color& color)
+                      const raytracer::Vect3& angles,
+                      const raytracer::Color& color)
 {
   center_ = center;
   side_ = side;
@@ -20,7 +20,7 @@ raytracer::Cube::Cube(const Vect3& center,
   auto z = raytracer::applyAngle(zi, angles);
   landmark_ = raytracer::Landmark(center, x, y, z);
 
-  squares_ = std::vector<raytracer::Square>();
+  squares_ = std::vector<gameobj::Square>();
 
   float semSide = side / 2;
   auto A = landmark_.transposePoint(raytracer::Vect3(-semSide,  semSide,  semSide));
@@ -38,44 +38,44 @@ raytracer::Cube::Cube(const Vect3& center,
   auto nDCE = landmark_.transposeVect(raytracer::Vect3(0, 0, -1));
   auto nFGA = landmark_.transposeVect(raytracer::Vect3(0, 0, 1));
 
-  squares_.push_back(raytracer::Square(A, B, D, nABD, color));
-  squares_.push_back(raytracer::Square(B, G, C, nBGC, color));
-  squares_.push_back(raytracer::Square(G, F, H, nGFH, color));
-  squares_.push_back(raytracer::Square(F, A, E, nFAE, color));
-  squares_.push_back(raytracer::Square(D, C, E, nDCE, color));
-  squares_.push_back(raytracer::Square(F, G, A, nFGA, color));
+  squares_.push_back(gameobj::Square(A, B, D, nABD, color));
+  squares_.push_back(gameobj::Square(B, G, C, nBGC, color));
+  squares_.push_back(gameobj::Square(G, F, H, nGFH, color));
+  squares_.push_back(gameobj::Square(F, A, E, nFAE, color));
+  squares_.push_back(gameobj::Square(D, C, E, nDCE, color));
+  squares_.push_back(gameobj::Square(F, G, A, nFGA, color));
 }
 
-raytracer::Vect3 raytracer::Cube::getCenter() const
+raytracer::Vect3 gameobj::Cube::getCenter() const
 {
   return center_;
 }
 
-float raytracer::Cube::getSide() const
+float gameobj::Cube::getSide() const
 {
   return side_;
 }
 
-raytracer::Vect3 raytracer::Cube::getAngles() const
+raytracer::Vect3 gameobj::Cube::getAngles() const
 {
   return angles_;
 }
 
-raytracer::Landmark raytracer::Cube::getLandmark() const
+raytracer::Landmark gameobj::Cube::getLandmark() const
 {
   return landmark_;
 }
 
-raytracer::Color raytracer::Cube::getColor() const
+raytracer::Color gameobj::Cube::getColor() const
 {
   return squares_[0].getColor();
 }
 
-std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>>
-raytracer::Cube::intersecte(const raytracer::Ray& ray)
+std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>>
+gameobj::Cube::intersecte(const raytracer::Ray& ray)
 {
   unsigned i = 0;
-  std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>> closer
+  std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>> closer
     = std::nullopt;
 
   while (i < squares_.size() && !closer.has_value())

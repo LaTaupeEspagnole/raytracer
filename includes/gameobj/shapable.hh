@@ -11,15 +11,15 @@
 #include "shapable.hh"
 #include "flatshapable.hh"
 
-namespace raytracer
+namespace gameobj
 {
   class Shapable
   {
   public:
 
-    virtual Color getColor() const = 0;
+    virtual raytracer::Color getColor() const = 0;
 
-    virtual std::optional<std::tuple<Vect3, FlatShapable*>>
-      intersecte(const Ray& ray) = 0;
+    virtual std::optional<std::tuple<raytracer::Vect3, FlatShapable*>>
+      intersecte(const raytracer::Ray& ray) = 0;
   };
 }

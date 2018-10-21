@@ -13,7 +13,7 @@
 #include "color.hh"
 #include "flatshapable.hh"
 
-namespace raytracer
+namespace gameobj
 {
   class Cube : public Shapable
   {
@@ -23,25 +23,25 @@ namespace raytracer
     ** landmark is the landmark of the cube
     ** objectAngles are the rotation to apply to the object after creating
     */
-    Cube(const Vect3& center,
+    Cube(const raytracer::Vect3& center,
          const float side,
-         const Vect3& angles,
-         const Color& color);
+         const raytracer::Vect3& angles,
+         const raytracer::Color& color);
 
-    Vect3 getCenter() const;
+    raytracer::Vect3 getCenter() const;
     float getSide() const;
-    Vect3 getAngles() const;
-    Landmark getLandmark() const;
-    Color getColor() const;
+    raytracer::Vect3 getAngles() const;
+    raytracer::Landmark getLandmark() const;
+    raytracer::Color getColor() const;
 
-    virtual std::optional<std::tuple<Vect3, FlatShapable*>>
-      intersecte(const Ray& ray) override;
+    virtual std::optional<std::tuple<raytracer::Vect3, FlatShapable*>>
+      intersecte(const raytracer::Ray& ray) override;
 
   private:
-    Vect3 center_;
+    raytracer::Vect3 center_;
     float side_;
-    Vect3 angles_;
-    Landmark landmark_;
+    raytracer::Vect3 angles_;
+    raytracer::Landmark landmark_;
     std::vector<Square> squares_;
   };
 }

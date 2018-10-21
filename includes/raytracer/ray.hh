@@ -17,10 +17,10 @@ namespace raytracer
     Vect3 getOrigin() const;
     Vect3 getVect() const;
 
-    bool colidesBefore(const std::vector<Shapable*>& objects,
+    bool colidesBefore(const std::vector<gameobj::Shapable*>& objects,
                        const float dist) const;
 
-    bool colides(const std::vector<Shapable*>& objects) const;
+    bool colides(const std::vector<gameobj::Shapable*>& objects) const;
 
   private:
     Vect3 origin_;

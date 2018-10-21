@@ -1,7 +1,15 @@
 CC= g++
-CXXFLAGS= -std=c++17 -pedantic -Wall -Wextra -Werror -Iincludes
+CXXFLAGS= -std=c++17 \
+			-pedantic \
+			-Wall \
+			-Wextra \
+			-Werror \
+			-Iincludes \
+			-Iincludes/raytracer \
+			-Iincludes/ui \
+			-Iincludes/gameobj
 
-VPATH=src
+VPATH=src:src/raytracer:src/ui:src/gameobj
 
 .PHONY: clean
 

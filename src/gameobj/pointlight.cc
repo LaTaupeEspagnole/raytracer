@@ -3,48 +3,48 @@
 #include "utils.hh"
 #include "ray.hh"
 
-raytracer::PointLight::PointLight(const Vect3& pos,
-                                  const Color& color,
+gameobj::PointLight::PointLight(const raytracer::Vect3& pos,
+                                  const raytracer::Color& color,
                                   const float brightness)
   : pos_(pos)
   , color_(color)
   , brightness_(brightness)
 {}
 
-raytracer::Vect3 raytracer::PointLight::getPos() const
+raytracer::Vect3 gameobj::PointLight::getPos() const
 {
   return pos_;
 }
 
-raytracer::Color raytracer::PointLight::getColor() const
+raytracer::Color gameobj::PointLight::getColor() const
 {
   return color_;
 }
 
-float raytracer::PointLight::getBrightness() const
+float gameobj::PointLight::getBrightness() const
 {
   return brightness_;
 }
 
-void raytracer::PointLight::setPos(const raytracer::Vect3& pos)
+void gameobj::PointLight::setPos(const raytracer::Vect3& pos)
 {
   pos_ = pos;
 }
 
-void raytracer::PointLight::setColor(const raytracer::Color& color)
+void gameobj::PointLight::setColor(const raytracer::Color& color)
 {
   color_ = color;
 }
 
-void raytracer::PointLight::setBrightness(const float brightness)
+void gameobj::PointLight::setBrightness(const float brightness)
 {
   brightness_ = brightness;
 }
 
 raytracer::Color
-raytracer::PointLight::interact(const std::vector<raytracer::Shapable*>& objs,
+gameobj::PointLight::interact(const std::vector<gameobj::Shapable*>& objs,
                                 const raytracer::Vect3& point,
-                                const raytracer::FlatShapable& obj) const
+                                const gameobj::FlatShapable& obj) const
 {
   std::ignore = obj;
 

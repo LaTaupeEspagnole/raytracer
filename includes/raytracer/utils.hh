@@ -49,7 +49,7 @@ namespace raytracer
   int closerToOrigin(Vect3 origin, Vect3 point1, Vect3 point2);
 
   /* Generates a frame */
-  std::vector<Color> renderFrame(const std::vector<Shapable*>& objects,
+  std::vector<Color> renderFrame(const std::vector<gameobj::Shapable*>& objects,
                                  const std::vector<Ray>& rays,
-                                 const std::vector<Lightable*>& lightList);
+                                 const std::vector<gameobj::Lightable*>& lightList);
 }

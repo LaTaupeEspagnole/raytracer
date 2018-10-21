@@ -9,25 +9,25 @@
 #include "shapable.hh"
 #include "flatshapable.hh"
 
-namespace raytracer
+namespace gameobj
 {
   class AmbientLight : public Lightable
   {
   public:
-    AmbientLight(const Color& color, const float brightness);
+    AmbientLight(const raytracer::Color& color, const float brightness);
 
-    Color getColor() const;
+    raytracer::Color getColor() const;
     float getBrightness() const;
 
-    void setColor(const Color& color);
+    void setColor(const raytracer::Color& color);
     void setBrightness(const float brightness);
 
-    virtual Color interact(const std::vector<Shapable*>& obj,
-                           const Vect3& point,
+    virtual raytracer::Color interact(const std::vector<Shapable*>& obj,
+                           const raytracer::Vect3& point,
                            const FlatShapable&) const override;
 
   private:
-    Color color_;
+    raytracer::Color color_;
     float brightness_;
   };
 }

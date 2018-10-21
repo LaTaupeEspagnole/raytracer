@@ -118,19 +118,19 @@ int raytracer::closerToOrigin(raytracer::Vect3 origin,
 }
 
 std::vector<raytracer::Color>
-raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
+raytracer::renderFrame(const std::vector<gameobj::Shapable*>& objects,
                        const std::vector<raytracer::Ray>& rays,
-                       const std::vector<raytracer::Lightable*>& lightList)
+                       const std::vector<gameobj::Lightable*>& lightList)
 {
   auto res = std::vector<raytracer::Color>();
   for (auto r : rays)
   {
     auto rayOrigin = r.getOrigin();
-    std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>> closer
+    std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>> closer
       = std::nullopt;
     for (auto o : objects)
     {
-      std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>> inter
+      std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>> inter
         = o->intersecte(r);
       if (inter.has_value())
       {
@@ -139,11 +139,11 @@ raytracer::renderFrame(const std::vector<raytracer::Shapable*>& objects,
           auto closerVal = std::get<0>(closer.value());
           auto interVal = std::get<0>(inter.value());
           if (closerToOrigin(rayOrigin, closerVal, interVal) == 2)
-            closer = std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>>
+            closer = std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>>
                       (inter.value());
         }
         else
-          closer = std::optional<std::tuple<raytracer::Vect3, raytracer::FlatShapable*>>
+          closer = std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>>
                       (inter.value());
       }
     }

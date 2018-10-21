@@ -4,14 +4,18 @@ namespace raytracer
 {
   class Camera;
   class Color;
-  class Cube;
   class Landmark;
-  class Plan;
   class Ray;
   class Screen;
-  class Square;
   class Vect2;
   class Vect3;
+}
+
+namespace gameobj
+{
+  class Cube;
+  class Plan;
+  class Square;
 
   class PointLight;
   class AmbientLight;

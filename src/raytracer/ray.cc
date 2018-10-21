@@ -25,7 +25,7 @@ raytracer::Vect3 raytracer::Ray::getVect() const
 }
 
 bool
-raytracer::Ray::colidesBefore(const std::vector<raytracer::Shapable*>& objects,
+raytracer::Ray::colidesBefore(const std::vector<gameobj::Shapable*>& objects,
                               const float dist) const
 {
   for (auto o : objects)
@@ -43,7 +43,7 @@ raytracer::Ray::colidesBefore(const std::vector<raytracer::Shapable*>& objects,
   return false;
 }
 
-bool raytracer::Ray::colides(const std::vector<raytracer::Shapable*>& objects) const
+bool raytracer::Ray::colides(const std::vector<gameobj::Shapable*>& objects) const
 {
   for (auto o : objects)
   {

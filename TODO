@@ -20,7 +20,7 @@ cool features to add to this project (sebastiengou@outlook.fr).
     (chose flatshapable)
 [~] Cleaning code
 [~] Introducing a documentation (maybe doxygen) and documenting code
-[ ] Redefining namespaces
+[?] Redefining namespaces
 [ ] Start optimising renderFrame() func (intersection ray/obj)
     (acheve 1/20 - 1/30 sec for one frame in 1280x720 res)
 [ ] Reflection

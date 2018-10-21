@@ -15,7 +15,7 @@ namespace raytracer
      * \brief Intuitive constructor.
      * \param x value of the x coordinate.
      * \param y value of the y coordinate.
-     * \param y value of the y coordinate.
+     * \param z value of the z coordinate.
      */
     Vect3(float x, float y, float z);
     /**
