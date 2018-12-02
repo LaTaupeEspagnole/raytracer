@@ -25,5 +25,5 @@ cool features to add to this project (sebastiengou@outlook.fr).
     (acheve 1/20 - 1/30 sec for one frame in 1280x720 res)
 [ ] Reflection
 [ ] Speculare light ?
-[ ] SDL2 integration
+[~] SDL2 integration
 [ ] Textures

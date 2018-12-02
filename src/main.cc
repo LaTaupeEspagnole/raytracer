@@ -4,6 +4,8 @@
 #include <string>
 #include <fstream>
 
+#include <SDL2/SDL.h>
+
 #include "ray.hh"
 #include "camera.hh"
 #include "vect.hh"
@@ -17,6 +19,7 @@
 #include "lightable.hh"
 #include "ambientlight.hh"
 #include "dirlight.hh"
+#include "gameui.hh"
 
 void writeRender(std::string filename,
                   std::vector<raytracer::Color>& pixels,
@@ -44,8 +47,8 @@ int main()
 {
   auto camPos = raytracer::Vect3(0, -10, 0);
   auto camAngle = raytracer::Vect3(0, raytracer::pi / 16, raytracer::pi / 8);
-  float width = 1920;
-  float height = 1080;
+  float width = 1280;
+  float height = 720;
 
   raytracer::Camera cam = raytracer::Camera(camPos,
                                             camAngle,
@@ -90,6 +93,11 @@ int main()
   auto rayList = raytracer::genRays(cam, screen);
 
   auto pixels = raytracer::renderFrame(objectList, rayList, lightList);
+
+  auto window = gameui::UIScreen("Raytracer Project", width, height, 0);
+  window.loadFrame(&pixels);
+  window.updateScreen();
+  SDL_Delay(1000);
 
   writeRender("test.ppm", pixels, width, height);
 

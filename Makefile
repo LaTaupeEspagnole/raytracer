@@ -9,6 +9,8 @@ CXXFLAGS= -std=c++17 \
 			-Iincludes/ui \
 			-Iincludes/gameobj
 
+LDFLAGS= -lSDL2
+
 VPATH=src:src/raytracer:src/ui:src/gameobj
 
 .PHONY: clean
@@ -26,7 +28,8 @@ OBJS= camera.o \
 	pointlight.o \
 	color.o \
 	ambientlight.o \
-	dirlight.o
+	dirlight.o \
+	gameui.o
 
 all: opti
 

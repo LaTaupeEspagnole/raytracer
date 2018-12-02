@@ -1,5 +1,5 @@
 # README
-This projects goal is to make a simple raytracer with using only cubes as 3D models.
+This projects goal is to make a simple raytracer with only cubes as 3D models.
 
 ## Example image
 ![ExampleImage1](./img/02_attenuation.png)
