@@ -126,11 +126,15 @@ raytracer::renderFrame(const std::vector<gameobj::Shapable*>& objects,
   for (auto r : rays)
   {
     auto rayOrigin = r.getOrigin();
-    std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>> closer
+    std::optional<std::tuple<raytracer::Vect3,
+                             raytracer::Vect2,
+                             gameobj::FlatShapable*>> closer
       = std::nullopt;
     for (auto o : objects)
     {
-      std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>> inter
+      std::optional<std::tuple<raytracer::Vect3,
+                               raytracer::Vect2,
+                               gameobj::FlatShapable*>> inter
         = o->intersecte(r);
       if (inter.has_value())
       {
@@ -139,23 +143,27 @@ raytracer::renderFrame(const std::vector<gameobj::Shapable*>& objects,
           auto closerVal = std::get<0>(closer.value());
           auto interVal = std::get<0>(inter.value());
           if (closerToOrigin(rayOrigin, closerVal, interVal) == 2)
-            closer = std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>>
+            closer = std::optional<std::tuple<raytracer::Vect3,
+                                              raytracer::Vect2,
+                                              gameobj::FlatShapable*>>
                       (inter.value());
         }
         else
-          closer = std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>>
+          closer = std::optional<std::tuple<raytracer::Vect3,
+                                            raytracer::Vect2,
+                                            gameobj::FlatShapable*>>
                       (inter.value());
       }
     }
 
     if (closer.has_value())
     {
-      auto resl = std::get<1>(closer.value())->getColor();
+      auto resl = std::get<2>(closer.value())->getColor();
       auto intencity = raytracer::Color(0, 0, 0);
       for (auto l : lightList)
         intencity += l->interact(objects,
                                  std::get<0>(closer.value()),
-                                 *std::get<1>(closer.value()));
+                                 *std::get<2>(closer.value()));
       intencity.normalize();
       res.push_back(resl * intencity);
     }

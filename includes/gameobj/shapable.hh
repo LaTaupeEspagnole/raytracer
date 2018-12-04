@@ -19,7 +19,9 @@ namespace gameobj
 
     virtual raytracer::Color getColor() const = 0;
 
-    virtual std::optional<std::tuple<raytracer::Vect3, FlatShapable*>>
+    virtual std::optional<std::tuple<raytracer::Vect3,
+                                     raytracer::Vect2,
+                                     FlatShapable*>>
       intersecte(const raytracer::Ray& ray) = 0;
   };
 }

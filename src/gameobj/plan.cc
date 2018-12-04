@@ -45,7 +45,9 @@ void gameobj::Plan::setColor(const raytracer::Color& color)
   color_ = color;
 }
 
-std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>>
+std::optional<std::tuple<raytracer::Vect3,
+                         raytracer::Vect2,
+                         gameobj::FlatShapable*>>
 gameobj::Plan::intersecte(const raytracer::Ray& ray)
 {
   if (norm_.dot(ray.getVect()) == 0.0f)
@@ -59,5 +61,5 @@ gameobj::Plan::intersecte(const raytracer::Ray& ray)
                     ray.getOrigin().getY() + ray.getVect().getY() * t,
                     ray.getOrigin().getZ() + ray.getVect().getZ() * t);
 
-  return std::make_tuple(res, this);
+  return std::make_tuple(res, raytracer::Vect2(), this);
 }

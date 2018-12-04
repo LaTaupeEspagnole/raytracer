@@ -27,7 +27,9 @@ namespace gameobj
     raytracer::Color getColor() const override;
     void setColor(const raytracer::Color& color);
 
-    std::optional<std::tuple<raytracer::Vect3, FlatShapable*>>
+    std::optional<std::tuple<raytracer::Vect3,
+                             raytracer::Vect2,
+                             FlatShapable*>>
       intersecte(const raytracer::Ray& ray) override;
 
   private:

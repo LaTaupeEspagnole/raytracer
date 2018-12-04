@@ -45,7 +45,9 @@ raytracer::Color gameobj::Square::getColor() const
   return p_.getColor();
 }
 
-std::optional<std::tuple<raytracer::Vect3, gameobj::FlatShapable*>>
+std::optional<std::tuple<raytracer::Vect3,
+                         raytracer::Vect2,
+                         gameobj::FlatShapable*>>
 gameobj::Square::intersecte(const raytracer::Ray& ray)
 {
   auto inter = p_.intersecte(ray);
@@ -58,6 +60,6 @@ gameobj::Square::intersecte(const raytracer::Ray& ray)
   float a = AP.dot(vAB_);
   float b = AP.dot(vAD_);
   if (a >= 0.0f && a <= vAB_.dot(vAB_) && b >= 0.0f && b <= vAD_.dot(vAD_))
-    return std::make_tuple(std::get<0>(inter.value()), this);
+    return std::make_tuple(std::get<0>(inter.value()), raytracer::Vect2(a, b), this);
   return std::nullopt;
 }
