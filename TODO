@@ -26,4 +26,5 @@ cool features to add to this project (sebastiengou@outlook.fr).
 [ ] Reflection
 [ ] Speculare light ?
 [~] SDL2 integration
-[ ] Textures
+[~] Textures
+[ ] Make an error handeling system

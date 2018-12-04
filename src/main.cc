@@ -43,8 +43,32 @@ void writeRender(std::string filename,
   ostrm.close();
 }
 
-int main()
+int main(int argc, char *argv[])
 {
+  bool showWindow = false;
+  bool writeFile = false;
+  bool borderless = false;
+  int indexArgv = 1;
+
+  while (indexArgv < argc)
+  {
+    if (strcmp(argv[indexArgv], "--show-window") == 0)
+      showWindow = true;
+    else if (strcmp(argv[indexArgv], "--write-file") == 0)
+      writeFile = true;
+    else if (strcmp(argv[indexArgv], "--borderless") == 0)
+      borderless = true;
+    else
+    {
+      std::cout << "Usage: " << argv[0] << " [OPTIONS]" << std::endl;
+      std::cout << "--show-window -> Show the graphicale window" << std::endl;
+      std::cout << "--write-file  -> Show the graphicale window" << std::endl;
+      std::cout << "--borderless  -> The graphical window will be borderless" << std::endl;
+      return 1;
+    }
+    indexArgv++;
+  }
+
   auto camPos = raytracer::Vect3(0, -10, 0);
   auto camAngle = raytracer::Vect3(0, raytracer::pi / 16, raytracer::pi / 8);
   float width = 1280;
@@ -94,12 +118,24 @@ int main()
 
   auto pixels = raytracer::renderFrame(objectList, rayList, lightList);
 
-  auto window = gameui::UIScreen("Raytracer Project", width, height, 0);
-  window.loadFrame(&pixels);
-  window.updateScreen();
-  SDL_Delay(1000);
+  if (showWindow)
+  {
+    uint32_t flags = gameui::WINDOWPARAM::NO_FULLSCREEN;
+    if (borderless)
+      flags = flags | gameui::WINDOWPARAM::BORDERLESS;
+    auto window = gameui::UIScreen("Raytracer Project",
+                                   width,
+                                   height,
+                                   flags);
+    window.loadFrame(&pixels);
+    window.updateScreen();
+    SDL_Delay(2000);
+  }
 
-  writeRender("test.ppm", pixels, width, height);
+  if (writeFile)
+  {
+    writeRender("test.ppm", pixels, width, height);
+  }
 
   return 0;
 }

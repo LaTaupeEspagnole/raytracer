@@ -1,9 +1,9 @@
 #include "gameui.hh"
 
 gameui::UIScreen::UIScreen(std::string pageTitle,
-                 unsigned width,
-                 unsigned height,
-                 unsigned screenState)
+                           unsigned width,
+                           unsigned height,
+                           uint32_t windowParam)
 {
   this->width = width;
   this->height = height;
@@ -14,11 +14,14 @@ gameui::UIScreen::UIScreen(std::string pageTitle,
   }
   else
   {
+    // Cheking the window parameters
     Uint32 flags = SDL_WINDOW_SHOWN;
-    if (screenState == 1)
+    if ((windowParam & WINDOWPARAM::FULLSCREEN) != 0)
       flags = flags | SDL_WINDOW_FULLSCREEN;
-    else if (screenState == 2)
+    if ((windowParam & WINDOWPARAM::FULLSCREEN_DESKTOP) != 0)
       flags = flags | SDL_WINDOW_FULLSCREEN_DESKTOP;
+    if ((windowParam & WINDOWPARAM::BORDERLESS) != 0)
+      flags = flags | SDL_WINDOW_BORDERLESS;
 
     this->window = SDL_CreateWindow(pageTitle.c_str(),
                                      SDL_WINDOWPOS_CENTERED,
@@ -26,7 +29,7 @@ gameui::UIScreen::UIScreen(std::string pageTitle,
                                      width,
                                      height,
                                      flags);
-    this->screenSurface = NULL;//SDL_GetWindowSurface(this->window);
+    this->screenSurface = NULL;
     this->renderer = SDL_CreateRenderer(this->window, -1, SDL_RENDERER_SOFTWARE);
   }
 }
@@ -63,4 +66,5 @@ void gameui::UIScreen::loadFrame(std::vector<raytracer::Color>* pixels)
   SDL_RenderClear(this->renderer);
   SDL_RenderCopy(this->renderer, texture, NULL, NULL);
   SDL_RenderPresent(this->renderer);
+  delete[] pixelsTab;
 }

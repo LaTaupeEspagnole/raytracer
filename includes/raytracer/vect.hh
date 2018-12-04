@@ -1,5 +1,10 @@
 #pragma once
 
+/**
+ * \file
+ * \brief Vect2 and Vect3 class managing vector operation
+ */
+
 #include "fwd.hh"
 
 namespace raytracer
